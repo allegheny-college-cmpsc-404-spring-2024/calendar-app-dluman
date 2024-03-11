@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div id = "container">
+	<div id = "calendar">
+		<div id = "calendar-month-control">
+			<div class = "calendar-nav-btn">
+				<
+			</div>
+			<div id = "calendar-month-display">
+				{{display_calendar.month_text}}
+			</div>
+			<div class = "calendar-nav-btn">
+				>
+			</div>
+		</div>
+		<div id = "calendar-grid">
+			{% for day in display_calendar.days_of_week %}
+				<div class = "date-row-item">{{day}}</div>
+			{% endfor %}
+			{% for n in range(display_calendar.days) %}
+				<div class = "clickable">{{n + 1}}</div>
+			{% endfor %}
+		</div>
+	</div>
+  </div>
+{% endblock %}

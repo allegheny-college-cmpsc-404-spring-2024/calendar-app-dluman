@@ -1,0 +1,40 @@
+html {
+  font-size: 15pt;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  height: 100vh;
+}
+
+#container { }
+
+/* Calendar containing ID */
+#calendar {
+	width: 50vw;
+	margin: 0 auto;
+}
+
+#calendar-month-control {
+	display: grid;
+	grid-template-columns: repeat(7, calc(50vw / 7));
+	grid-template-rows: 100%;
+	text-align: center;
+	align-items: center;
+	margin-bottom: 1vh;
+}
+
+#calendar-grid {
+	display: grid;
+	grid-template-columns: repeat(7, calc(50vw/7));
+	grid-template-rows: repeat(6, calc(100vh/6));
+	text-align: center;
+	align-items:center;
+}
+
+#calendar-grid div {
+	display: grid;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
