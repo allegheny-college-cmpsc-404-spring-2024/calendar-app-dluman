@@ -5,6 +5,7 @@
   * Calendar control
     * Calendar month scroll
     * Calendar day grid
+  * Media queries
 */
 
 html {
@@ -25,8 +26,9 @@ html {
 /* Calendar control */
 
 #calendar {
-	width: 50vw;
+	width: 100%;
 	margin: 0 auto;
+	grid-column-start: 3;
 }
 
 /* Calendar month scroll */
@@ -55,8 +57,8 @@ html {
 	grid-template-rows: repeat(6, calc(100% / 6));
 	text-align: center;
 	align-items:center;
-	grid-row-gap: 1vh;
-	grid-column-gap: 1vw;
+	/*grid-row-gap: 1vh;
+	grid-column-gap: 1vw;*/
 }
 
 #calendar-grid div {
@@ -83,3 +85,16 @@ html {
 	font-weight: 800;
 }
 
+/* Media Queries */
+
+@media (width < 431px) {
+
+	#container {
+		grid-template-columns: 95vw;
+	}
+
+	#calendar{
+		grid-column-start: 1;
+	}	
+
+}
