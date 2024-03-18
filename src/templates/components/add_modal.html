@@ -1,0 +1,25 @@
+<div id = "add-modal" class = "modal-dialog modal-lg modal-dialog-centered">
+  <div class = "modal-content">
+    <form hx-post = "/events/new">
+      <p>
+        <label for="date-picker">Date:</label>
+        <input name="date" id="date-picker" type="date" value = "{{data.year}}-{{data.month}}-{{data.day}}">
+      </p>
+      <p>
+        <label for="time-picket">Time:</label>
+        <input name="time" id = "time-picker" type="time">
+      </p>
+      <p>
+        <label for="evt-title">Title:</label>
+        <input name = "title" id = "evt-title" type="text">
+      </p>
+      <p>
+        <label for="evt-desciption">Description:</label>
+        <textarea name = "description" id = "evt-description">Enter event details...</textarea>
+      </p>
+      <button class = "btn btn-secondary" hx-post = "/events/new" data-bs-dismiss="modal" hx-trigger = "evt-posted from:body">
+        Add Event
+      </button>
+    </form>
+  </div>
+</div>

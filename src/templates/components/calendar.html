@@ -1,0 +1,37 @@
+{% block calendar %}
+	<div id = "calendar">
+		<div id = "calendar-month-control">
+			<div class = "calendar-nav-btn rounded" hx-post="/" hx-vals = '{"month": {{display_calendar.display_month - 1}}}'>
+				<
+			</div>
+			<div id = "calendar-month-display">
+				{{display_calendar.month_text}}
+			</div>
+			<div class = "calendar-nav-btn rounded" hx-post="/" hx-vals = '{"month": {{display_calendar.display_month + 1}}}'>
+				>
+			</div>
+		</div>
+		<div id = "calendar-grid">
+			{% for day in display_calendar.days_of_week %}
+				<div class = "date-row-item rounded">{{day}}</div>
+			{% endfor %}
+			{% for n in display_calendar.days %}
+        {% if n.date %}
+	  			<div 
+            class = "clickable rounded {% if n.data %}appt{% endif %}"
+            hx-get = "/modals/add-modal"
+            hx-target = "#modals"
+            hx-trigger= "click"
+            hx-vals='{"month":"{{display_calendar.display_month}}", "day": "{{n.date}}", "year": "{{display_calendar.display_year}}"}'
+            data-bs-toggle="modal"
+            data-bs-target="#modals"
+          >
+            {{n.date}}
+          </div>
+        {% else %}
+          <div class = "unclickable rounded"></div>
+        {% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
