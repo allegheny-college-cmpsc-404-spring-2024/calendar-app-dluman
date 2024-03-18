@@ -40,7 +40,19 @@ def calendar():
 
 @app.route("/modals/add-modal", methods = ["GET"])
 def add_modal_get():
-  return Response(status=200)
+  month, day, year = (
+    request.args.get("month"),
+    request.args.get("day") or 1,
+    request.args.get("year")
+  )
+  if int(month) < 10:
+     month = "0" + month
+  if int(day) < 10:
+     day = "0" + day
+  return render_template(
+    "components/add_modal.html",
+    data = {"month": month, "day": day, "year": year}
+  )
 
 @app.route("/events/new", methods = ["POST"])
 def new_event_post():

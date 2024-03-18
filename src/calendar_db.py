@@ -15,10 +15,28 @@ class DB:
     return entry
 
   def get_appointments_data_only(self, month: str = "Dec", year: int = 2023):
-    return True
+    cursor = self.conn.cursor()
+    query = cursor.execute(
+        f"""
+            SELECT id, day FROM appointment_data
+            WHERE month = '{month}' AND year = '{year}'
+        """
+    )
+    return query.fetchall()
 
   def get_appointments_with_meta(self, month: str = "Dec", year: int = 2023):
     return True
 
   def add_appointment(self, data: dict = {}) -> bool:
+    cursor = self.conn.cursor()
+    try:
+        query = cursor.execute(
+            f"""
+                INSERT INTO appointment_data(month,day,year)
+                VALUES('{data["month"]}', '{data["day"]}', '{data["year"]}')
+            """
+        )
+        self.conn.commit()
+    except:
+       return False
     return True
