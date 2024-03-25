@@ -40,11 +40,15 @@ class DB:
     try:
       query = cursor.execute(
         f"""
-          BEGIN TRANSACTION;
-          	INSERT INTO appointment_data(month, day, year) VALUES('1', '2', '3');
-          COMMIT;
-            INSERT INTO appointment_meta(time, title, description) VALUES('4', '5', '6');
-          COMMIT;
+          INSERT INTO appointment_data(month,day,year)
+          VALUES('{data["month"]}', '{data["day"]}', '{data["year"]}')
+        """
+      )
+      # TODO: GET THE ID FROM THE FIRST INSERT AND USE IN SECOND QUERY
+      query = cursor.execute(
+        f"""
+          INSERT INTO appointment_meta(time,title,description)
+          VALUES('{data["time"]}', '{data["title"]}', '{data["description"]}')
         """
       )
       self.conn.commit()

@@ -61,13 +61,8 @@ def add_modal_get():
 
 @app.route("/events/new", methods = ["POST"])
 def new_event_post():
-    db = DB()
-    data = {}
-    for field in request.form:
-      if field == "date":
-        data.update(Calendar.parse_date(request.form[field]))
-      data[field] = request.form[field]
-    status = db.add_appointment(data)
-    if status:
-      return Response(status=200)
-    return Response(status=500)
+  data = requests.post(
+    "http://localhost:5000/api/v1/events/add",
+    json = request.form
+  )
+  return Response(status = data.status_code)

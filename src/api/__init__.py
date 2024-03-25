@@ -49,4 +49,13 @@ def api_appt_list_post():
 
 @app.route("/v1/events/add", methods = ["POST"])
 def api_evt_add_post():
-  pass
+  event = {} 
+  data = post.data(request)
+  for field in data:
+    if field == "date":
+      event.update(Calendar.parse_date(data[field]))
+    event[field] = data[field]
+  status = DB().add_appointment(event)
+  if status:
+    return Response(status = 200)
+  return Response(status = 500)
