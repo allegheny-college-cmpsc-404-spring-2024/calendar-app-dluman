@@ -1,7 +1,7 @@
 import datetime
 import calendar
 
-from calendar_db import DB
+from .calendar_db import DB
 
 class Calendar:
 

@@ -1,50 +1,13 @@
-from flask import Flask, Response, redirect, request, render_template
-
-import datetime
-
-from calendar_display import *
-from calendar_db import DB
-
-app: Flask = Flask(__name__)
-
-@app.route("/", methods = ["GET", "POST"])
-def index():
-  month = None
-  year = None
-  try:
-    month = request.form["month"]
-    year = request.form["year"]
-  except:
-    now = datetime.datetime.now()
-    month = now.month
-    year = now.year
-  return render_template(
-    "layout.html",
-    data = {
-      "month": month,
-      "year": year
-    }
-  )
-
-@app.route("/calendar", methods = ["GET"])
-def calendar():
-    month, year = (
-      request.args.get("month"),
-      request.args.get("year")
-    )
-    calendar = Calendar(int(month), int(year))
-    return render_template(
-      "components/calendar.html",
-      display_calendar = calendar.date_display()
-    )
-
-@app.route("/modals/add-modal", methods = ["GET"])
-def add_modal_get():
-  return Response(status=200)
-
-@app.route("/events/new", methods = ["POST"])
-def new_event_post():
-    return Response(status=200)
+from werkzeug.serving import run_simple
+from app import application
 
 if __name__ == "__main__":
-    app.run(port = 5001)
+  run_simple(
+    'localhost',
+    5000,
+    application,
+    use_reloader = True,
+    use_debugger = True,
+    use_evalex = True,
+    threaded = True
+  )
